@@ -24,14 +24,14 @@ public class Main {
 
         //cifro el mensaje
         System.out.println("***** MENSAJE ENCRIPTADO *****");
-        byte[] cifrar = UtilitatsXifrar.encryptA5(mensaje.getBytes(), keyPair.getPublic());
+        byte[] cifrar = UtilitatsXifrar.encryptDataA5(mensaje.getBytes(), keyPair.getPublic());
         String cifrado = new String(cifrar, StandardCharsets.UTF_8);
         System.out.println(cifrado);
         System.out.println();
 
         //descifro el mensaje
         System.out.println("***** MENSAJE DESCRIFRADO *****");
-        byte[] descifrar = UtilitatsXifrar.decryptA5(cifrar, keyPair.getPrivate());
+        byte[] descifrar = UtilitatsXifrar.decryptDataA5(cifrar, keyPair.getPrivate());
         String descifrado = new String(descifrar, StandardCharsets.UTF_8);
         System.out.println(descifrado);
         System.out.println();
@@ -49,14 +49,14 @@ public class Main {
 
         //cifro el mensaje
         System.out.println("***** MENSAJE ENCRIPTADO *****");
-        byte[] cifrar2 = UtilitatsXifrar.encryptA5(mensaje2.getBytes(), keyPair2.getPublic());
+        byte[] cifrar2 = UtilitatsXifrar.encryptDataA5(mensaje2.getBytes(), keyPair2.getPublic());
         String cifrado2 = new String(cifrar2, StandardCharsets.UTF_8);
         System.out.println(cifrado2);
         System.out.println();
 
         //descifro el mensaje
         System.out.println("***** MENSAJE DESCRIFRADO *****");
-        byte[] descifrar2 = UtilitatsXifrar.decryptA5(cifrar2, keyPair2.getPrivate());
+        byte[] descifrar2 = UtilitatsXifrar.decryptDataA5(cifrar2, keyPair2.getPrivate());
         String descifrado2 = new String(descifrar2, StandardCharsets.UTF_8);
         System.out.println(descifrado2);
         System.out.println();
@@ -141,27 +141,27 @@ public class Main {
 
         System.out.println("Introduzca ruta KeyStore: ");
         String rutaKeyStore = scanner.nextLine();
-        System.out.println("Ruta del KeyStore --> " + rutaKeyStore);
+        System.out.println("Ruta KeyStore: " + rutaKeyStore);
         System.out.println();
 
         String certificadoAlias = "lamevaclauM9";
         System.out.println("Alias: " + certificadoAlias);
         System.out.println();
 
-        System.out.print("Introduce la contraseña de la KeyStore: ");
+        System.out.print("Introduce la contraseña KeyStore: ");
         String passwKeyStore = scanner.nextLine();
         System.out.println();
 
-        System.out.print("Introdueix el password de la Clau: ");
+        System.out.print("Introdueix password de la Clave: ");
         String passClave = scanner.nextLine();
         System.out.println();
 
         KeyStore keyStore1 = UtilitatsXifrar.loadKeyStore(rutaKeyStore, passwKeyStore);
-        PublicKey publicKey2 = UtilitatsXifrar.getPublicKey(certificadoAlias);
+        PublicKey publicKey2 = UtilitatsXifrar.getPublicKey(keyStore1, certificadoAlias, passClave);
 
-        System.out.println("Algoritmo de la clave publica: " + publicKey.getAlgorithm());
-        System.out.println("Formato de la clave privada: " + publicKey.getFormat());
-        System.out.println("Encoded de la clave publica: " + publicKey.getEncoded());
+        System.out.println("Algoritmo de la clave publica: " + publicKey2.getAlgorithm());
+        System.out.println("Formato de la clave privada: " + publicKey2.getFormat());
+        System.out.println("Encoded de la clave publica: " + publicKey2.getEncoded());
 
         System.out.println();
 
